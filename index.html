@@ -1,0 +1,2919 @@
+<!DOCTYPE html>
+<html lang="sw" translate="no"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="google" content="notranslate">
+<title>KISEJA NYUMBA</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0F1923">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>:root{--navy:#0F1923;--teal:#0A6E6E;--teal2:#0D9488;--bg:#F4F6F8;--bd:#E2E8F0;--tx:#1E293B;--mut:#64748B;--red:#DC2626;--grn:#059669;--amb:#D97706}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.45}
+.hidden{display:none!important}h1,h2,h3{margin:0}h2{font-size:1.15rem;margin-bottom:12px}h3{font-size:.95rem;margin:18px 0 8px;color:var(--navy)}
+.mut{color:var(--mut)}.sm{font-size:.8rem}.mono{font-family:ui-monospace,Menlo,Consolas,monospace}.b{font-weight:700}
+.bar{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--teal2),#fff,var(--teal2));background-size:200% 100%;animation:bar 1s linear infinite;z-index:9999}
+@keyframes bar{to{background-position:-200% 0}}
+.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(150deg,var(--navy),var(--teal))}
+.acard{background:#fff;border-radius:18px;padding:22px;width:100%;max-width:400px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.acard h1{text-align:center;font-size:1.3rem;color:var(--navy)}.alogo{text-align:center;font-size:2.4rem}.acard p{text-align:center;margin:2px 0 14px}
+.seg{display:flex;background:#EEF2F6;border-radius:12px;padding:3px;margin-bottom:14px}.seg button{flex:1;border:0;background:none;padding:9px;border-radius:10px;font-weight:700;color:var(--mut);cursor:pointer;font-family:inherit}.seg button.on{background:#fff;color:var(--teal);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+label{display:block;font-size:.72rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 4px}
+.inp,select.inp,textarea.inp{width:100%;border:1.5px solid var(--bd);border-radius:10px;padding:11px 12px;font-size:1rem;font-family:inherit;background:#fff;color:var(--tx)}.inp:focus{outline:none;border-color:var(--teal2)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:11px 16px;font-weight:700;font-size:.95rem;cursor:pointer;background:var(--teal);color:#fff;font-family:inherit;text-align:center}.btn.full{width:100%;margin-top:14px}.btn.sec{background:#E2E8F0;color:var(--tx)}.btn.red{background:var(--red)}.btn.grn{background:var(--grn)}.btn.s{padding:6px 11px;font-size:.8rem}.btn:disabled{opacity:.55}
+.link{background:none;border:0;color:var(--teal);font-weight:700;cursor:pointer;display:block;margin:12px auto 0;font-family:inherit}
+.err{color:var(--red);font-size:.85rem;text-align:center;margin-top:10px;min-height:1em}
+.top{background:var(--navy);color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}.top b{font-size:1rem}.top .who{font-size:.74rem;opacity:.75}.top button{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit}
+.shell{display:block}main{padding:14px 14px 84px;max-width:900px;margin:0 auto}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--bd);display:flex;z-index:60}nav button{flex:1;border:0;background:none;padding:8px 2px 7px;font-size:.68rem;color:var(--mut);cursor:pointer;font-family:inherit;position:relative}nav button span{display:block;font-size:1.3rem}nav button.on{color:var(--teal);font-weight:800}
+.nb{position:absolute;top:2px;right:22%;background:var(--red);color:#fff;border-radius:10px;font-size:.62rem;padding:1px 6px;font-weight:800}
+@media(min-width:820px){nav{top:48px;bottom:0;right:auto;width:170px;flex-direction:column;border-top:0;border-right:1px solid var(--bd);padding-top:8px}nav button{flex:none;text-align:left;padding:12px 16px;font-size:.9rem}nav button span{display:inline;margin-right:8px;font-size:1.1rem}main{margin-left:190px;padding-bottom:30px}.nb{right:14px;top:10px}}
+.card{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:6px}@media(min-width:600px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:12px;cursor:pointer}.kpi .l{font-size:.68rem;color:var(--mut);font-weight:700;text-transform:uppercase}.kpi .v{font-size:1.25rem;font-weight:800;margin-top:2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--bd)}.row:last-child{border-bottom:0}.row .r{text-align:right}
+.list{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:0 14px}.tap{cursor:pointer}
+.bdg{display:inline-block;border-radius:20px;padding:2px 9px;font-size:.7rem;font-weight:800}.bdg.g{background:#D1FAE5;color:#065F46}.bdg.r{background:#FEE2E2;color:#991B1B}.bdg.a{background:#FEF3C7;color:#92400E}.bdg.n{background:#E2E8F0;color:#475569}
+.banner{border-radius:12px;padding:12px 14px;margin-bottom:12px;font-weight:600}.banner.g{background:#ECFDF5;color:#065F46}.banner.r{background:#FEF2F2;color:#991B1B}.banner.a{background:#FFFBEB;color:#92400E}
+.empty{color:var(--mut);text-align:center;padding:18px}
+.modal{position:fixed;inset:0;background:rgba(15,25,35,.55);z-index:200;display:flex;align-items:flex-end;justify-content:center}@media(min-width:600px){.modal{align-items:center}}
+.mbox{background:#fff;border-radius:18px 18px 0 0;padding:18px;width:100%;max-width:520px;max-height:92vh;overflow:auto}@media(min-width:600px){.mbox{border-radius:18px}}
+.mbox h2{display:flex;justify-content:space-between}.x{background:none;border:0;font-size:1.3rem;cursor:pointer;color:var(--mut)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.acts .btn{flex:1}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:12px;z-index:300;font-weight:600;max-width:90%;text-align:center}.toast.e{background:var(--red)}
+.code{font-size:1.5rem;letter-spacing:.2em;font-weight:800;color:var(--teal);text-align:center;background:#F0FDFA;border:2px dashed var(--teal2);border-radius:12px;padding:10px;margin:8px 0}
+.rcp{border:2px solid var(--navy);border-radius:10px;padding:14px}.rcp .hd{text-align:center;font-weight:800;color:var(--navy);margin-bottom:8px}.rqr{width:104px;height:104px;border:1px solid var(--bd);padding:2px;flex:none}.rqr svg{width:100%;height:100%;display:block}
+.vcard{border:2px solid var(--grn);background:#ECFDF5;border-radius:14px;padding:14px;margin-top:14px}.vcard.bad{border-color:var(--red);background:#FEF2F2}.vname{font-size:1.15rem;font-weight:900;margin:2px 0 10px}
+@media print{body *{visibility:hidden}#receipt,#receipt *{visibility:visible}#receipt{position:absolute;left:0;top:0;width:100%}.rqr{width:28mm;height:28mm}}
+</style></head><body>
+<div id="bar" class="bar hidden"></div>
+<div id="screen-auth" class="auth hidden"></div>
+<div id="screen-app" class="hidden">
+  <div class="top"><div><b>🏠 KISEJA NYUMBA</b><div class="who" id="who"></div></div><div><button onclick="refresh()" title="Onyesha upya" style="margin-right:6px">🔄</button><button onclick="doLogout()">Toka</button></div></div>
+  <div class="shell"><nav id="nav"></nav><main id="main"></main></div>
+</div>
+<div id="screen-verify" class="auth hidden"></div>
+<div id="modal" class="modal hidden" onclick="if(event.target===this)closeModal()"><div class="mbox" id="mbox"></div></div>
+<div id="toast" class="toast hidden"></div>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+<script>/* qrcode-generator 1.4.4 - Kazuhiko Arase - MIT */
+//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(row * cellSize, col * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define([], factory);
+  } else if (typeof exports === 'object') {
+      module.exports = factory();
+  }
+}(function () {
+    return qrcode;
+}));
+
+</script>
+<script>
+'use strict';
+// ════════ KISEJA NYUMBA — msingi ════════
+const FB_CONFIG = /*FB_CONFIG_START*/{apiKey:'AIzaSyAL6kfctfuAnZaJMFw9onQdyKO9u6wn8rY',authDomain:'tmsm-4207.firebaseapp.com',projectId:'tmsm-4207',appId:'1:1024848464862:web:42373390f8977d20d5eb4f'}/*FB_CONFIG_END*/;
+const CONFIGURED = !!FB_CONFIG.apiKey;
+let auth = null, db = null;
+if(CONFIGURED){ try{ firebase.initializeApp(FB_CONFIG); auth = firebase.auth(); db = firebase.firestore(); }catch(e){ console.error(e); } }
+const TS = () => firebase.firestore.FieldValue.serverTimestamp();
+const S = {user:null, member:null, ws:null, tenants:[], units:[], payments:[], invites:[], tenant:null, priv:{}, tab:'', busy:false};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tzs = n => (parseInt(n)||0).toLocaleString('en-US');
+const fmt = iso => { if(!iso) return '—'; const p = String(iso).slice(0,10).split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : '—'; };
+const pad2 = n => String(n).padStart(2,'0');
+const todayISO = () => { const d = new Date(); return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); };
+const ms = ts => !ts ? 0 : (ts.toMillis ? ts.toMillis() : (ts.seconds ? ts.seconds*1000 : 0));
+function show(id){ ['screen-auth','screen-app','screen-verify'].forEach(s => $(s).classList.toggle('hidden', s!==id)); window.scrollTo(0,0); }
+function busy(on){ $('bar').classList.toggle('hidden', !on); }
+function openModal(html){ $('mbox').innerHTML = html; $('modal').classList.remove('hidden'); }
+function closeModal(){ $('modal').classList.add('hidden'); $('mbox').innerHTML = ''; }
+let _tt = 0;
+function toast(msg, err){ const t = $('toast'); t.textContent = msg; t.className = 'toast' + (err?' e':''); clearTimeout(_tt); _tt = setTimeout(()=>t.classList.add('hidden'), err?5000:3200); }
+function qparam(k){ try{ return (new URLSearchParams(location.search).get(k)||'').trim(); }catch(e){ return ''; } }
+const APP_URL = () => location.origin + location.pathname;
+
+// ── tarehe ──
+function addMonthsISO(iso, n){
+  const d = new Date(String(iso).slice(0,10)+'T00:00:00Z'); if(isNaN(d)) return iso;
+  const day = d.getUTCDate(); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth()+n);
+  const last = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth()+1, 0)).getUTCDate();
+  d.setUTCDate(Math.min(day,last)); return d.toISOString().slice(0,10);
+}
+function daysLeft(iso){ const x = new Date(String(iso).slice(0,10)+'T00:00:00Z'); return Math.floor((x - new Date())/86400000); }
+function monthsBetween(a, b){
+  const s = new Date(a+'T00:00:00Z'), e = new Date(b+'T00:00:00Z'); if(isNaN(s)||isNaN(e)||e<=s) return 1;
+  let m = (e.getUTCFullYear()-s.getUTCFullYear())*12 + (e.getUTCMonth()-s.getUTCMonth());
+  const diff = (e - new Date(addMonthsISO(a,m)+'T00:00:00Z'))/86400000;
+  if(diff > 15) m++; else if(diff < -15) m--; return Math.max(1, Math.min(120, m));
+}
+// ── simu na msimbo ──
+function normPhone(p){ let d = String(p||'').replace(/\D/g,''); if(d.startsWith('255')) d = '0'+d.slice(3); else if(d.length===9) d = '0'+d; return /^0\d{9}$/.test(d) ? d : ''; }
+const emailFor = phone => 't255' + phone.slice(1) + '@mpangaji.kiseja.com';
+function genCode(){
+  const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', a = new Uint8Array(8);
+  try{ (window.crypto||window.msCrypto).getRandomValues(a); }catch(e){ for(let i=0;i<8;i++) a[i] = Math.floor(Math.random()*256); }
+  return Array.from(a).map(b => A[b % A.length]).join('');
+}
+
+// ── injini ya kodi (kutoka mfumo wa zamani, iliyojaribiwa) ──
+// Kodi inalipwa mapema kwa miezi; malipo yanafunika miezi kamili kulingana na kiasi; salio linabebwa; deni = miezi iliyopita × pango − salio
+function acct(t){
+  const dl = daysLeft(t.kuisha), expired = dl < 0, monthsOverdue = expired ? Math.ceil(-dl/30.4375) : 0;
+  const rent = parseInt(t.rent)||0, net = parseInt(t.salio)||0, overdueAmt = monthsOverdue*rent;
+  return {paidThrough:t.kuisha, dl, expired, monthsOverdue, rent, net, overdueAmt, deni:Math.max(0,overdueAmt-net), salio:Math.max(0,net-overdueAmt)};
+}
+function payCover(a, startISO, rent, miezi, kilipo){
+  const jumla = rent*miezi, avail = kilipo + a.net;
+  let covered = rent>0 ? Math.floor(avail/rent) : miezi; covered = Math.max(0, Math.min(miezi, covered));
+  return {jumla, avail, covered, mpya:addMonthsISO(startISO, covered), salio:avail - covered*rent, hali: covered>=miezi ? 'IMELIPWA' : (kilipo>0 ? 'SEHEMU' : 'HAIJALIPIWA')};
+}
+function payBadge(a){ return a.deni>0 ? '<span class="bdg r">Deni TZS '+tzs(a.deni)+'</span>' : (a.salio>0 ? '<span class="bdg g">Salio +'+tzs(a.salio)+'</span>' : '<span class="bdg g">Imelipwa</span>'); }
+const METHODS = ['M-PESA','TIGO PESA','AIRTEL MONEY','HALOPESA','BENKI','TASLIMU'];
+function statusBadge(p){ return p.status==='pending' ? '<span class="bdg a">Inasubiri idhini</span>' : p.status==='rejected' ? '<span class="bdg r">Imekataliwa</span>' : '<span class="bdg g">'+(p.hali==='SEHEMU'?'Sehemu':'Imekubaliwa')+'</span>'; }
+
+// ── QR (qrcode-generator, MIT) ──
+function qrSvg(text){
+  const q = qrcode(0,'M'); q.addData(text); q.make();
+  const n = q.getModuleCount(), m = 2, size = n+2*m; let d = '';
+  for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(q.isDark(r,c)) d += `M${c+m},${r+m}h1v1h-1z`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" shape-rendering="crispEdges"><rect width="${size}" height="${size}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
+}
+const verifyUrl = no => APP_URL() + '?hakiki=' + encodeURIComponent(no);
+function friendlyErr(e){
+  const c = (e && e.code) || '';
+  if(c==='auth/email-already-in-use') return 'Akaunti hii tayari ipo. Bofya "Ingia".';
+  if(c==='auth/wrong-password' || c==='auth/invalid-credential' || c==='auth/user-not-found' || c==='auth/invalid-login-credentials') return 'Taarifa si sahihi. Angalia na ujaribu tena.';
+  if(c==='auth/weak-password') return 'Nenosiri liwe na herufi 6 au zaidi.';
+  if(c==='auth/invalid-email') return 'Barua pepe si sahihi.';
+  if(c==='auth/network-request-failed') return 'Hakuna mtandao. Jaribu tena.';
+  if(c==='auth/too-many-requests') return 'Majaribio mengi. Subiri kidogo, kisha ujaribu tena.';
+  if(c==='permission-denied') return 'Huna ruhusa ya kufanya hili.';
+  if(typeof e === 'string') return e;
+  return (e && e.message) ? e.message : 'Kuna tatizo. Jaribu tena.';
+}
+
+// ════════ KUINGIA ════════
+const A = {role:'owner', mode:'login'};
+const val = id => { const e = $(id); return e && e.value != null ? String(e.value).trim() : ''; };
+function setAuth(role, mode){ A.role = role; A.mode = mode || 'login'; renderAuth(); }
+function authErr(m){ const e = $('auth-err'); if(e) e.textContent = m || ''; }
+function renderAuth(msg){
+  const o = A.role==='owner', login = A.mode==='login'; let form;
+  if(o) form = login
+    ? `<label>Barua pepe</label><input id="a-email" class="inp" type="email" autocomplete="username">
+       <label>Nenosiri</label><input id="a-pw" class="inp" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doOwnerLogin()">
+       <button class="btn full" onclick="doOwnerLogin()">Ingia</button>
+       <button class="link" onclick="setAuth('owner','reg')">Sina akaunti? Jisajili</button>`
+    : `<label>Jina lako au la biashara</label><input id="a-name" class="inp" autocomplete="name">
+       <label>Barua pepe</label><input id="a-email" class="inp" type="email" autocomplete="username">
+       <label>Nenosiri (herufi 6 au zaidi)</label><input id="a-pw" class="inp" type="password" autocomplete="new-password">
+       <button class="btn full" onclick="doOwnerRegister()">Fungua Akaunti</button>
+       <button class="link" onclick="setAuth('owner','login')">Nina akaunti? Ingia</button>`;
+  else form = login
+    ? `<label>Namba ya simu</label><input id="a-phone" class="inp" type="tel" placeholder="07xxxxxxxx" autocomplete="username">
+       <label>Nenosiri</label><input id="a-pw" class="inp" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doTenantLogin()">
+       <button class="btn full" onclick="doTenantLogin()">Ingia</button>
+       <button class="link" onclick="setAuth('tenant','join')">Nina msimbo kutoka kwa mwenye nyumba? Jiunge</button>`
+    : `<div class="sm mut">Mwenye nyumba wako atakupa msimbo wa herufi 8.</div>
+       <label>Msimbo</label><input id="a-code" class="inp mono" maxlength="8" autocomplete="off" style="text-transform:uppercase;letter-spacing:.2em">
+       <label>Namba yako ya simu</label><input id="a-phone" class="inp" type="tel" placeholder="07xxxxxxxx">
+       <label>Tengeneza nenosiri (herufi 6 au zaidi)</label><input id="a-pw" class="inp" type="password" autocomplete="new-password">
+       <button class="btn full" onclick="doTenantJoin()">Jiunge</button>
+       <button class="link" onclick="setAuth('tenant','login')">Tayari nimejiunga? Ingia</button>`;
+  $('screen-auth').innerHTML = `<div class="acard"><div class="alogo">🏠</div><h1>KISEJA NYUMBA</h1><p class="mut">Usimamizi wa nyumba na kodi</p>
+    <div class="seg"><button class="${o?'on':''}" onclick="setAuth('owner')">Mwenye Nyumba</button><button class="${o?'':'on'}" onclick="setAuth('tenant')">Mpangaji</button></div>
+    ${CONFIGURED ? '' : '<div class="banner a sm">Mfumo bado haujaunganishwa na Firebase (config haijawekwa).</div>'}
+    ${form}<div id="auth-err" class="err">${msg ? esc(msg) : ''}</div>
+    <button class="link" onclick="openVerifyPublic()">🔎 Hakiki Risiti</button></div>`;
+}
+async function doOwnerLogin(){
+  authErr(''); const email = val('a-email'), pw = $('a-pw').value;
+  if(!email || !pw) return authErr('Jaza barua pepe na nenosiri');
+  busy(true); try{ await auth.signInWithEmailAndPassword(email, pw); }catch(e){ authErr(friendlyErr(e)); } busy(false);
+}
+async function doOwnerRegister(){
+  authErr(''); const name = val('a-name'), email = val('a-email'), pw = $('a-pw').value;
+  if(!name || !email || !pw) return authErr('Jaza taarifa zote');
+  S.busy = true; busy(true); let cred = null;
+  try{
+    cred = await auth.createUserWithEmailAndPassword(email, pw); const uid = cred.user.uid, b = db.batch();
+    b.set(db.collection('workspaces').doc(uid), {name, ownerUid:uid, tenantSeq:0, createdAt:TS()});
+    b.set(db.collection('members').doc(uid), {role:'owner', ws:uid, name});
+    await b.commit(); S.busy = false; await boot(cred.user);
+  }catch(e){
+    S.busy = false; if(cred && cred.user){ try{ await cred.user.delete(); }catch(x){} }
+    authErr(friendlyErr(e));
+  }
+  busy(false);
+}
+async function doTenantLogin(){
+  authErr(''); const phone = normPhone(val('a-phone')), pw = $('a-pw').value;
+  if(!phone) return authErr('Namba ya simu si sahihi (mfano 0712345678)'); if(!pw) return authErr('Weka nenosiri');
+  busy(true); try{ await auth.signInWithEmailAndPassword(emailFor(phone), pw); }catch(e){ authErr(friendlyErr(e)); } busy(false);
+}
+async function doTenantJoin(){
+  authErr(''); const code = val('a-code').toUpperCase().replace(/[^A-Z0-9]/g,''), phone = normPhone(val('a-phone')), pw = $('a-pw').value;
+  if(code.length !== 8) return authErr('Msimbo una herufi 8'); if(!phone) return authErr('Namba ya simu si sahihi (mfano 0712345678)'); if(pw.length < 6) return authErr('Nenosiri liwe na herufi 6 au zaidi');
+  S.busy = true; busy(true); let cred = null;
+  try{
+    cred = await auth.createUserWithEmailAndPassword(emailFor(phone), pw); const uid = cred.user.uid;
+    const iv = await db.collection('invites').doc(code).get();
+    if(!iv.exists) throw 'Msimbo si sahihi. Angalia na ujaribu tena.';
+    const inv = iv.data();
+    if(inv.used) throw 'Msimbo huu umeshatumika. Omba msimbo mpya kwa mwenye nyumba.';
+    if(normPhone(inv.phone) !== phone) throw 'Namba ya simu haifanani na ile aliyoandika mwenye nyumba.';
+    const b = db.batch();
+    b.set(db.collection('members').doc(uid), {role:'tenant', ws:inv.ws, tenantId:inv.tenantId, code, name:inv.name||''});
+    b.update(db.collection('invites').doc(code), {used:true, usedBy:uid, usedAt:TS()});
+    await b.commit(); S.busy = false; await boot(cred.user);
+  }catch(e){
+    S.busy = false; if(cred && cred.user){ try{ await cred.user.delete(); }catch(x){} }
+    if(e && e.code==='auth/email-already-in-use'){ A.role = 'tenant'; A.mode = 'login'; renderAuth(); }   // akaunti ipo: mpeleke kuingia
+    authErr(friendlyErr(e));   // vinginevyo acha alichoandika kibaki
+  }
+  busy(false);
+}
+async function doLogout(){ try{ await auth.signOut(); }catch(e){} S.member = null; S.tab = ''; }
+
+// ════════ KUANZA ════════
+async function boot(user){
+  if(S.busy) return;
+  S.user = user;
+  if(!CONFIGURED){ renderAuth(); show('screen-auth'); return; }
+  const hk = qparam('hakiki');
+  if(hk && !S.hkShown){ S.hkShown = true; renderVerify(hk); show('screen-verify'); return; }
+  if(!user){ S.member = null; if($('screen-auth').classList.contains('hidden')){ renderAuth(); show('screen-auth'); } return; }   // usifute ujumbe wa kosa ulioonyeshwa tayari
+  busy(true);
+  try{
+    const m = await db.collection('members').doc(user.uid).get();
+    if(!m.exists){ await auth.signOut(); renderAuth('Akaunti hii haijakamilika. Jisajili au jiunge tena.'); show('screen-auth'); busy(false); return; }
+    S.member = m.data(); S.ws = S.member.ws;
+    if(S.member.role === 'owner'){ await loadOwner(); if(!S.tab || !['dash','wap','mal','nyu'].includes(S.tab)) S.tab = 'dash'; }
+    else { await loadTenant(); if(!['home','lipa','ris','mimi'].includes(S.tab)) S.tab = 'home'; }
+    renderApp(); show('screen-app');
+  }catch(e){ console.error(e); toast(friendlyErr(e), true); renderAuth(friendlyErr(e)); show('screen-auth'); }
+  busy(false);
+}
+function renderApp(){ if(!S.member) return; S.member.role === 'owner' ? renderOwner() : renderTenant(); }
+function goTab(t){ S.tab = t; renderApp(); window.scrollTo(0,0); }
+async function refresh(){ busy(true); try{ S.member.role==='owner' ? await loadOwner() : await loadTenant(); renderApp(); }catch(e){ toast(friendlyErr(e), true); } busy(false); }
+function copyText(t){ try{ navigator.clipboard.writeText(t).then(()=>toast('Imenakiliwa')); }catch(e){ toast(t); } }
+
+// ════════ MWENYE NYUMBA ════════
+async function loadOwner(){
+  const ws = S.ws, q = c => db.collection(c).where('ws','==',ws).get();
+  const [t,u,p,i] = await Promise.all([q('tenants'), q('units'), q('payments'), q('invites')]);
+  const map = x => x.docs.map(d => ({id:d.id, ...d.data()}));
+  S.tenants = map(t).sort((a,b)=>String(a.no).localeCompare(String(b.no)));
+  S.units = map(u).sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+  S.payments = map(p).sort((a,b)=>ms(b.createdAt)-ms(a.createdAt));
+  S.invites = map(i);
+}
+const actT = () => S.tenants.filter(t => t.status !== 'x');
+const pad3 = n => String(n).padStart(3,'0');
+function renderOwner(){
+  const pend = S.payments.filter(p=>p.status==='pending').length;
+  $('who').textContent = S.member.name || 'Mwenye nyumba';
+  const tabs = [['dash','📊','Dashibodi'],['wap','👥','Wapangaji'],['mal','💳','Malipo'],['nyu','🏠','Nyumba']];
+  $('nav').innerHTML = tabs.map(([k,i,l]) => `<button class="${S.tab===k?'on':''}" onclick="goTab('${k}')"><span>${i}</span>${l}${k==='mal'&&pend?`<i class="nb">${pend}</i>`:''}</button>`).join('');
+  $('main').innerHTML = ({dash:vDash, wap:vWap, mal:vMal, nyu:vNyu}[S.tab] || vDash)();
+}
+function pRow(p){
+  return `<div class="row tap" onclick="openApprove('${p.id}')"><div><div class="b">${esc(p.tenantName)}</div><div class="sm mut">${esc(p.unit)} · ${esc(p.method)} · ${fmt(p.paidOn)}</div></div><div class="r"><div class="b">TZS ${tzs(p.amount)}</div>${statusBadge(p)}</div></div>`;
+}
+function vDash(){
+  const ac = actT().map(t => ({t, a:acct(t)})), debtors = ac.filter(x=>x.a.deni>0).sort((x,y)=>y.a.deni-x.a.deni);
+  const total = debtors.reduce((s,x)=>s+x.a.deni,0), pend = S.payments.filter(p=>p.status==='pending');
+  return `<h2>Dashibodi</h2><div class="kpis">
+    <div class="kpi" onclick="goTab('wap')"><div class="l">Wapangaji</div><div class="v">${ac.length}</div></div>
+    <div class="kpi" onclick="goTab('mal')"><div class="l">Wanasubiri idhini</div><div class="v" style="color:${pend.length?'var(--amb)':'inherit'}">${pend.length}</div></div>
+    <div class="kpi"><div class="l">Wanaodaiwa</div><div class="v" style="color:${debtors.length?'var(--red)':'inherit'}">${debtors.length}</div></div>
+    <div class="kpi"><div class="l">Madeni ya Kodi</div><div class="v" style="font-size:1rem;color:${total?'var(--red)':'inherit'}">TZS ${tzs(total)}</div></div></div>
+    <h3>Malipo yanayosubiri idhini</h3>${pend.length ? '<div class="list">'+pend.slice(0,5).map(pRow).join('')+'</div>' : '<div class="empty">Hakuna malipo yanayosubiri ✅</div>'}
+    <h3>Wanaodaiwa</h3>${debtors.length ? '<div class="list">'+debtors.slice(0,6).map(x=>`<div class="row tap" onclick="openTenant('${x.t.id}')"><div><div class="b">${esc(x.t.name)}</div><div class="sm mut">${esc(x.t.unit)} · miezi ${x.a.monthsOverdue}</div></div><div class="r">${payBadge(x.a)}</div></div>`).join('')+'</div>' : '<div class="empty">Hakuna anayedaiwa ✅</div>'}`;
+}
+function vWap(){
+  const rows = actT().map(t => { const a = acct(t), inv = S.invites.find(i=>i.tenantId===t.id), joined = !inv || inv.used;
+    return `<div class="row tap" onclick="openTenant('${t.id}')"><div><div class="b">${esc(t.name)}</div><div class="sm mut">${esc(t.unit)} · hadi ${fmt(t.kuisha)}${joined?'':' · <span class="bdg n">Hajajiunga</span>'}</div></div><div class="r">${payBadge(a)}</div></div>`; }).join('');
+  return `<div class="row" style="border:0;padding-top:0"><h2 style="margin:0">Wapangaji</h2><button class="btn s" onclick="openTenantForm()">➕ Mpangaji</button></div>${rows ? '<div class="list">'+rows+'</div>' : '<div class="empty">Bado hakuna mpangaji. Bofya ➕ Mpangaji.</div>'}`;
+}
+async function openTenant(id){
+  const t = S.tenants.find(x=>x.id===id); if(!t) return; const a = acct(t);
+  openModal('<div class="empty">⏳</div>');
+  let pv = {}; try{ const d = await db.collection('tenantPrivate').doc(id).get(); if(d.exists) pv = d.data(); }catch(e){}
+  const inv = S.invites.find(i=>i.tenantId===id), tel = n => n ? `<a href="tel:${esc(n)}">${esc(n)}</a>` : '—', none = '<span class="mut">Bado hajaweka</span>';
+  const kin = (pv.kinName||pv.kinPhone) ? `${esc(pv.kinName||'—')}${pv.kinRel?' ('+esc(pv.kinRel)+')':''} · ${tel(pv.kinPhone)}` : none;
+  const nida = pv.nida ? esc((pv.nidaType?pv.nidaType+': ':'')+pv.nida) : none;
+  const invHtml = !inv ? '' : inv.used ? '<div class="banner g" style="margin-top:12px">✔ Amejiunga na app</div>'
+    : `<div class="sm mut" style="margin-top:12px">Msimbo wa kumjiunga (mpe mpangaji):</div><div class="code">${esc(inv.id)}</div><div class="acts"><button class="btn sec s" onclick="shareInvite('${esc(inv.id)}')">📤 Tuma kwa WhatsApp</button><button class="btn sec s" onclick="copyText('${esc(inv.id)}')">📋 Nakili msimbo</button></div>`;
+  openModal(`<h2>${esc(t.name)}<button class="x" onclick="closeModal()">✕</button></h2>
+    <div class="row"><span class="mut">Simu</span><b>${tel(t.phone)}</b></div>
+    <div class="row"><span class="mut">Nyumba</span><b>${esc(t.unit)}</b></div>
+    <div class="row"><span class="mut">Pango kwa mwezi</span><b>TZS ${tzs(t.rent)}</b></div>
+    <div class="row"><span class="mut">Kodi imelipwa hadi</span><b>${fmt(t.kuisha)}</b></div>
+    <div class="row"><span class="mut">Hali</span><span>${payBadge(a)}</span></div>
+    <div class="row"><span class="mut">Kitambulisho</span><span>${nida}</span></div>
+    <div class="row"><span class="mut">Mtu wa karibu</span><span>${kin}</span></div>${invHtml}
+    <div class="acts"><button class="btn" onclick="openPayForm('${id}')">💳 Rekodi Malipo</button><button class="btn sec" onclick="openTenantForm('${id}')">✏️ Hariri</button></div>
+    <div class="acts">${inv && !inv.used ? `<button class="btn sec s" onclick="newInvite('${id}')">🔄 Msimbo mpya</button>` : ''}<button class="btn red s" onclick="markLeft('${id}')">🚪 Amehama</button></div>`);
+}
+function shareInvite(code){
+  const msg = `Karibu KISEJA NYUMBA. Fungua ${APP_URL()} , chagua "Mpangaji" kisha "Jiunge". Msimbo wako: ${code}. Tumia namba yako ya simu uliyonipa.`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+async function newInvite(tid){
+  const t = S.tenants.find(x=>x.id===tid); busy(true);
+  try{
+    for(const i of S.invites.filter(i=>i.tenantId===tid && !i.used)) await db.collection('invites').doc(i.id).delete();
+    await db.collection('invites').doc(genCode()).set({ws:S.ws, tenantId:tid, phone:t.phone, name:t.name, used:false, createdAt:TS()});
+    await loadOwner(); renderApp(); openTenant(tid); toast('Msimbo mpya umetengenezwa');
+  }catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+function syncPaid(){ const p = $('f-paid'); if(p && p.dataset.t !== '1') p.value = $('f-start').value; }
+function openTenantForm(id){
+  const t = id ? S.tenants.find(x=>x.id===id) : null;
+  openModal(`<h2>${t?'Hariri Mpangaji':'Mpangaji Mpya'}<button class="x" onclick="closeModal()">✕</button></h2>
+    <label>Jina kamili</label><input id="f-name" class="inp" value="${esc(t?t.name:'')}">
+    <label>Namba ya simu</label><input id="f-phone" class="inp" type="tel" placeholder="07xxxxxxxx" value="${esc(t?t.phone:'')}">
+    <label>Nyumba / chumba</label><input id="f-unit" class="inp" list="units-dl" value="${esc(t?t.unit:'')}"><datalist id="units-dl">${S.units.map(u=>`<option value="${esc(u.name)}">`).join('')}</datalist>
+    <div class="g2"><div><label>Pango kwa mwezi (TZS)</label><input id="f-rent" class="inp" type="number" inputmode="numeric" value="${t?t.rent:''}"></div>
+    <div><label>Tarehe ya kuingia</label><input id="f-start" class="inp" type="date" value="${t?t.startDate:todayISO()}" onchange="syncPaid()"></div></div>
+    ${t ? '' : `<label>Kodi imelipwa hadi <span style="text-transform:none;font-weight:400">(acha ile ya kuingia kama bado hajalipa)</span></label><input id="f-paid" class="inp" type="date" value="${todayISO()}" onchange="this.dataset.t='1'">`}
+    <div class="acts"><button class="btn sec" onclick="closeModal()">Ghairi</button><button class="btn" onclick="saveTenantForm('${t?t.id:''}')">Hifadhi</button></div>`);
+}
+async function saveTenantForm(id){
+  const name = val('f-name'), phone = normPhone(val('f-phone')), unit = val('f-unit'), rent = parseInt(val('f-rent'))||0, start = val('f-start');
+  if(!name || !unit || rent <= 0 || !start) return toast('Jaza jina, nyumba, pango na tarehe ya kuingia', true);
+  if(!phone) return toast('Namba ya simu si sahihi (mfano 0712345678)', true);
+  if(S.tenants.find(t=>t.phone===phone && t.id!==id && t.status!=='x')) return toast('Namba hii ya simu tayari ipo kwa mpangaji mwingine', true);
+  busy(true);
+  try{
+    if(!S.units.find(u=>u.name===unit)) await db.collection('units').add({ws:S.ws, name:unit, rent, note:'', createdAt:TS()});
+    if(id){
+      await db.collection('tenants').doc(id).update({name, phone, unit, rent, startDate:start});
+      const inv = S.invites.find(i=>i.tenantId===id && !i.used); if(inv && inv.phone !== phone) await db.collection('invites').doc(inv.id).update({phone, name});
+      await loadOwner(); closeModal(); renderApp(); toast('Imehifadhiwa');
+    }else{
+      const paid = val('f-paid') || start, code = genCode(), tref = db.collection('tenants').doc();
+      await db.runTransaction(async tx => {
+        const wref = db.collection('workspaces').doc(S.ws), w = await tx.get(wref), seq = ((w.data()||{}).tenantSeq||0) + 1;
+        tx.update(wref, {tenantSeq:seq});
+        tx.set(tref, {ws:S.ws, no:pad3(seq), name, phone, unit, rent, startDate:start, kuisha:paid, salio:0, seq:0, status:'a', createdAt:TS()});
+        tx.set(db.collection('invites').doc(code), {ws:S.ws, tenantId:tref.id, phone, name, used:false, createdAt:TS()});
+      });
+      await loadOwner(); renderApp(); openTenant(tref.id); toast('Mpangaji ameongezwa. Mpe msimbo wake.');
+    }
+  }catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+async function markLeft(id){
+  const t = S.tenants.find(x=>x.id===id), a = acct(t);
+  const msg = 'Mwondoe ' + t.name + ' kwenye orodha ya wapangaji?' + (a.deni>0 ? '\n\n⚠️ Ana deni la TZS ' + tzs(a.deni) + '.' : '') + (!a.expired ? '\n\nAmelipa kodi hadi ' + fmt(t.kuisha) + '.' : '');
+  if(!confirm(msg)) return; busy(true);
+  try{ await db.collection('tenants').doc(id).update({status:'x', leftOn:todayISO()}); await loadOwner(); closeModal(); renderApp(); toast('Ameondolewa'); }catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+// ── Malipo ──
+function vMal(){
+  const pend = S.payments.filter(p=>p.status==='pending'), done = S.payments.filter(p=>p.status!=='pending').slice(0,40);
+  const dRow = p => `<div class="row tap" onclick="${p.status==='approved'?`openReceipt('${p.id}')`:`openApprove('${p.id}')`}"><div><div class="b">${esc(p.tenantName)}</div><div class="sm mut">${esc(p.unit)} · ${fmt(p.paidOn)}${p.receiptNo?' · '+esc(p.receiptNo):''}</div></div><div class="r"><div class="b">TZS ${tzs(p.amount)}</div>${statusBadge(p)}</div></div>`;
+  return `<div class="row" style="border:0;padding-top:0"><h2 style="margin:0">Malipo</h2><button class="btn s" onclick="openPayForm()">➕ Rekodi Malipo</button></div>
+    <h3>Yanasubiri idhini (${pend.length})</h3>${pend.length ? '<div class="list">'+pend.map(pRow).join('')+'</div>' : '<div class="empty">Hakuna ✅</div>'}
+    <h3>Yaliyoshughulikiwa</h3>${done.length ? '<div class="list">'+done.map(dRow).join('')+'</div>' : '<div class="empty">Bado hakuna.</div>'}`;
+}
+function payInfo(p){
+  return `<div class="vname">${esc(p.tenantName)}</div>
+    <div class="row"><span class="mut">Nyumba</span><b>${esc(p.unit)}</b></div><div class="row"><span class="mut">Kiasi alichotuma</span><b>TZS ${tzs(p.amount)}</b></div>
+    <div class="row"><span class="mut">Njia</span><b>${esc(p.method)}</b></div>${p.ref ? `<div class="row"><span class="mut">Namba ya muamala</span><b class="mono">${esc(p.ref)}</b></div>` : ''}
+    <div class="row"><span class="mut">Tarehe ya malipo</span><b>${fmt(p.paidOn)}</b></div><div class="row"><span class="mut">Miezi aliyoomba</span><b>${p.months}</b></div>${p.note ? `<div class="sm mut" style="margin-top:6px">${esc(p.note)}</div>` : ''}`;
+}
+function openApprove(pid){
+  const p = S.payments.find(x=>x.id===pid), t = p && S.tenants.find(x=>x.id===p.tenantId); if(!p || !t) return;
+  if(p.status !== 'pending') return openModal(`<h2>Malipo<button class="x" onclick="closeModal()">✕</button></h2>${payInfo(p)}<div class="banner r" style="margin-top:12px">Yamekataliwa: ${esc(p.reason||'—')}</div>`);
+  const a = acct(t), r = payCover(a, a.paidThrough, parseInt(t.rent)||0, p.months, p.amount);
+  openModal(`<h2>Idhinisha Malipo<button class="x" onclick="closeModal()">✕</button></h2>${payInfo(p)}
+    <div class="banner ${r.hali==='IMELIPWA'?'g':'a'}" style="margin-top:12px">Ukikubali: kipindi ${fmt(a.paidThrough)} → <b>${fmt(r.mpya)}</b> (miezi ${r.covered} kati ya ${p.months})${r.salio>0?`, salio la mbele TZS ${tzs(r.salio)}`:''}${r.salio<0?`, deni litabaki TZS ${tzs(-r.salio)}`:''}</div>
+    <div class="sm mut">Hakikisha pesa imeingia kwenye simu/akaunti yako kabla ya kukubali.</div>
+    <div class="acts"><button class="btn red" onclick="openReject('${pid}')">Kataa</button><button class="btn grn" onclick="approveNow('${pid}')">✔ Kubali</button></div>`);
+}
+async function approvePayment(pid){
+  const pref = db.collection('payments').doc(pid); let out = null;
+  await db.runTransaction(async tx => {
+    const ps = await tx.get(pref); if(!ps.exists) throw 'Malipo hayapatikani'; const p = ps.data(); if(p.status !== 'pending') throw 'Malipo haya yameshashughulikiwa';
+    const tref = db.collection('tenants').doc(p.tenantId), ts = await tx.get(tref), t = ts.data();
+    const a = acct(t), start = a.paidThrough || t.startDate, r = payCover(a, start, parseInt(t.rent)||0, p.months, p.amount);
+    const seq = (t.seq||0) + 1, no = 'RCP-' + S.ws.slice(0,5).toUpperCase() + '-' + t.no + '-' + String(seq).padStart(3,'0');
+    tx.update(pref, {status:'approved', receiptNo:no, kuanza:start, mpya:r.mpya, covered:r.covered, salio:r.salio, hali:r.hali, decidedAt:TS(), decidedBy:S.user.uid});
+    tx.update(tref, {kuisha:r.mpya, salio:r.salio, seq});
+    tx.set(db.collection('receipts').doc(no), {ws:S.ws, no, name:t.name, unit:t.unit, amount:p.amount, paidOn:p.paidOn, kuanza:start, mpya:r.mpya, hali:r.hali, method:p.method});
+    out = {no, r};
+  });
+  return out;
+}
+async function approveNow(pid){
+  busy(true);
+  try{ const o = await approvePayment(pid); await loadOwner(); closeModal(); renderApp(); toast('✔ Imekubaliwa. Risiti ' + o.no); }
+  catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+function openReject(pid){
+  openModal(`<h2>Kataa Malipo<button class="x" onclick="closeModal()">✕</button></h2><label>Sababu (mpangaji ataiona)</label><textarea id="rj" class="inp" rows="3" placeholder="Mfano: Pesa haijaingia / namba ya muamala si sahihi"></textarea>
+    <div class="acts"><button class="btn sec" onclick="openApprove('${pid}')">Rudi</button><button class="btn red" onclick="rejectNow('${pid}')">Kataa Malipo</button></div>`);
+}
+async function rejectNow(pid){
+  const reason = val('rj'); if(reason.length < 3) return toast('Andika sababu', true); busy(true);
+  try{ await db.collection('payments').doc(pid).update({status:'rejected', reason, decidedAt:TS(), decidedBy:S.user.uid}); await loadOwner(); closeModal(); renderApp(); toast('Malipo yamekataliwa'); }
+  catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+// kiolezo cha pamoja cha kuhesabu (mwenye nyumba 'o', mpangaji 't')
+function payTenant(p){ return p==='o' ? S.tenants.find(x=>x.id===val('o-tenant')) : S.tenant; }
+function payPrev(p){
+  const t = payTenant(p), box = $(p+'-prev'); if(!t){ box.innerHTML = ''; return; }
+  const a = acct(t), m = Math.max(1, parseInt(val(p+'-miezi'))||3), rent = parseInt(t.rent)||0;
+  const hd = $(p+'-hadi'); if(hd && document.activeElement !== hd) hd.value = addMonthsISO(a.paidThrough, m);
+  const am = $(p+'-amt'); if(am && am.dataset.t !== '1' && document.activeElement !== am) am.value = rent*m;   // pendekeza kiasi = pango × miezi
+  const amt = parseInt(val(p+'-amt'))||0, r = payCover(a, a.paidThrough, rent, m, amt);
+  box.innerHTML = `Kodi ya miezi ${m} = <b>TZS ${tzs(rent*m)}</b> (kipindi ${fmt(a.paidThrough)} → ${fmt(addMonthsISO(a.paidThrough,m))}). ` + (amt>0 ? `Kiasi hiki kinafunika miezi <b>${r.covered}</b> (hadi <b>${fmt(r.mpya)}</b>)${r.salio>0?`, salio TZS ${tzs(r.salio)}`:''}.` : 'Weka kiasi kilicholipwa.');
+}
+function payHadi(p){ const t = payTenant(p); if(!t) return; const hd = val(p+'-hadi'); if(!hd) return; $(p+'-miezi').value = monthsBetween(acct(t).paidThrough, hd); const am = $(p+'-amt'); if(am) am.dataset.t = ''; payPrev(p); }
+function payFields(p, withRef){
+  return `<div class="g2"><div><label>Miezi (kawaida 3)</label><input id="${p}-miezi" class="inp" type="number" min="1" max="24" value="3" oninput="const a=$('${p}-amt');if(a)a.dataset.t='';payPrev('${p}')"></div>
+    <div><label>Hadi tarehe (kalenda)</label><input id="${p}-hadi" class="inp" type="date" onchange="payHadi('${p}')"></div></div>
+    <label>Kiasi kilicholipwa (TZS)</label><input id="${p}-amt" class="inp" type="number" inputmode="numeric" oninput="this.dataset.t='1';payPrev('${p}')">
+    <div class="g2"><div><label>Njia ya malipo</label><select id="${p}-method" class="inp">${METHODS.map(m=>`<option>${m}</option>`).join('')}</select></div>
+    <div><label>Tarehe ya malipo</label><input id="${p}-date" class="inp" type="date" value="${todayISO()}"></div></div>
+    <label>Namba ya muamala ${withRef?'':'(inahitajika kwa simu/benki)'}</label><input id="${p}-ref" class="inp mono" placeholder="Mfano: QJK3L9X2PA" autocomplete="off">
+    <div id="${p}-prev" class="banner a sm" style="margin-top:12px"></div>`;
+}
+function openPayForm(tid){
+  const ts = actT(); if(!ts.length) return toast('Ongeza mpangaji kwanza', true);
+  openModal(`<h2>Rekodi Malipo<button class="x" onclick="closeModal()">✕</button></h2>
+    <label>Mpangaji</label><select id="o-tenant" class="inp" onchange="const a=$('o-amt');a.dataset.t='';payPrev('o')">${ts.map(t=>`<option value="${t.id}" ${t.id===tid?'selected':''}>${esc(t.name)} — ${esc(t.unit)}</option>`).join('')}</select>
+    ${payFields('o', true)}<div class="acts"><button class="btn sec" onclick="closeModal()">Ghairi</button><button class="btn grn" onclick="saveOwnerPay()">✔ Hifadhi na Toa Risiti</button></div>`);
+  payPrev('o');
+}
+async function saveOwnerPay(){
+  const t = payTenant('o'), amount = parseInt(val('o-amt'))||0, months = Math.max(1, Math.min(24, parseInt(val('o-miezi'))||3));
+  if(!t) return toast('Chagua mpangaji', true); if(amount <= 0) return toast('Weka kiasi kilichopokelewa', true);
+  if(S._paying) return; S._paying = true; busy(true);
+  try{
+    const ref = await db.collection('payments').add({ws:S.ws, tenantId:t.id, tenantName:t.name, unit:t.unit, amount, months, method:val('o-method'), ref:val('o-ref'), paidOn:val('o-date')||todayISO(), note:'', status:'pending', createdBy:'owner', createdAt:TS()});
+    const o = await approvePayment(ref.id); await loadOwner(); closeModal(); renderApp(); toast('✔ Risiti ' + o.no + ' imetolewa');
+    const p = S.payments.find(x=>x.id===ref.id); if(p) openReceipt(p.id);
+  }catch(e){ toast(friendlyErr(e), true); } S._paying = false; busy(false);
+}
+// ── Nyumba ──
+function vNyu(){
+  const rows = S.units.map(u => { const occ = actT().find(t=>t.unit===u.name);
+    return `<div class="row"><div><div class="b">${esc(u.name)}</div><div class="sm mut">${occ ? 'Mpangaji: '+esc(occ.name) : 'Haijapangishwa'}</div></div><div class="r"><div class="b">TZS ${tzs(u.rent)}</div><span class="bdg ${occ?'g':'n'}">${occ?'Imepangwa':'Wazi'}</span></div></div>`; }).join('');
+  return `<div class="row" style="border:0;padding-top:0"><h2 style="margin:0">Nyumba</h2><button class="btn s" onclick="openUnitForm()">➕ Nyumba</button></div>${rows ? '<div class="list">'+rows+'</div>' : '<div class="empty">Bado hakuna nyumba. Zinaongezwa pia unapoongeza mpangaji.</div>'}`;
+}
+function openUnitForm(){
+  openModal(`<h2>Nyumba Mpya<button class="x" onclick="closeModal()">✕</button></h2><label>Jina / namba ya nyumba</label><input id="u-name" class="inp" placeholder="Mfano MTR/64A/04">
+    <label>Pango la kawaida kwa mwezi (TZS)</label><input id="u-rent" class="inp" type="number" inputmode="numeric"><div class="acts"><button class="btn sec" onclick="closeModal()">Ghairi</button><button class="btn" onclick="saveUnit()">Hifadhi</button></div>`);
+}
+async function saveUnit(){
+  const name = val('u-name'), rent = parseInt(val('u-rent'))||0; if(!name || rent <= 0) return toast('Jaza jina na pango', true);
+  if(S.units.find(u=>u.name===name)) return toast('Nyumba hii tayari ipo', true); busy(true);
+  try{ await db.collection('units').add({ws:S.ws, name, rent, note:'', createdAt:TS()}); await loadOwner(); closeModal(); renderApp(); toast('Nyumba imeongezwa'); }catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+// ── Risiti (mwenye nyumba na mpangaji) ──
+function openReceipt(pid){
+  const p = S.payments.find(x=>x.id===pid); if(!p || !p.receiptNo) return;
+  const t = S.tenants.find(x=>x.id===p.tenantId) || S.tenant || {};
+  openModal(`<div id="receipt" class="rcp"><div class="hd">KISEJA NYUMBA<div class="sm mut">RISITI YA MALIPO</div></div>
+    <div class="row"><span class="mut">Namba</span><b class="mono">${esc(p.receiptNo)}</b></div>
+    <div class="sm mut" style="margin-top:6px">JINA LA MLIPAJI</div><div class="vname">${esc(p.tenantName||t.name)}</div>
+    <div class="row"><span class="mut">Nyumba</span><b>${esc(p.unit||t.unit)}</b></div><div class="row"><span class="mut">Kiasi</span><b>TZS ${tzs(p.amount)}</b></div>
+    <div class="row"><span class="mut">Tarehe</span><b>${fmt(p.paidOn)}</b></div><div class="row"><span class="mut">Kipindi</span><b>${fmt(p.kuanza)} → ${fmt(p.mpya)}</b></div>
+    <div class="row"><span class="mut">Njia</span><b>${esc(p.method)}</b></div>${p.hali==='SEHEMU'?'<div class="banner a">Malipo ya sehemu</div>':''}
+    <div style="display:flex;gap:12px;align-items:center;margin-top:12px"><div class="rqr">${qrSvg(verifyUrl(p.receiptNo))}</div><div class="sm mut">Hakiki risiti hii: piga picha barcode kwa kamera ya simu. Namba: <b>${esc(p.receiptNo)}</b></div></div></div>
+    <div class="acts"><button class="btn sec" onclick="closeModal()">Funga</button><button class="btn" onclick="window.print()">🖨️ Chapisha</button></div>`);
+}
+
+// ════════ MPANGAJI ════════
+async function loadTenant(){
+  const tid = S.member.tenantId, ws = S.ws;
+  const [t, pv, p] = await Promise.all([
+    db.collection('tenants').doc(tid).get(), db.collection('tenantPrivate').doc(tid).get(),
+    db.collection('payments').where('tenantId','==',tid).where('ws','==',ws).get() ]);
+  if(!t.exists) throw 'Taarifa zako hazipatikani. Wasiliana na mwenye nyumba.';
+  S.tenant = {id:t.id, ...t.data()}; S.priv = pv.exists ? pv.data() : {};
+  S.payments = p.docs.map(d=>({id:d.id, ...d.data()})).sort((a,b)=>ms(b.createdAt)-ms(a.createdAt));
+}
+function renderTenant(){
+  const pend = S.payments.filter(p=>p.status==='pending').length;
+  $('who').textContent = S.tenant.name;
+  const tabs = [['home','🏠','Nyumbani'],['lipa','💳','Lipa'],['ris','🧾','Risiti'],['mimi','👤','Mimi']];
+  $('nav').innerHTML = tabs.map(([k,i,l]) => `<button class="${S.tab===k?'on':''}" onclick="goTab('${k}')"><span>${i}</span>${l}${k==='ris'&&pend?`<i class="nb">${pend}</i>`:''}</button>`).join('');
+  $('main').innerHTML = ({home:tHome, lipa:tLipa, ris:tRis, mimi:tMimi}[S.tab] || tHome)();
+  if(S.tab === 'lipa') payPrev('t');
+}
+function tHome(){
+  const t = S.tenant, a = acct(t), pend = S.payments.filter(p=>p.status==='pending');
+  const banner = a.deni > 0 ? `<div class="banner r">⚠️ Kodi imechelewa miezi ${a.monthsOverdue}. Deni: <b>TZS ${tzs(a.deni)}</b></div>`
+    : a.expired ? '<div class="banner a">Kodi imeisha. Tafadhali lipa.</div>'
+    : `<div class="banner g">✅ Umelipa kodi hadi <b>${fmt(t.kuisha)}</b>${a.salio>0?` · Salio la mbele TZS ${tzs(a.salio)}`:''}</div>`;
+  return `<h2>Karibu, ${esc(t.name.split(' ')[0])}</h2>${banner}
+    <div class="card"><div class="row"><span class="mut">Nyumba</span><b>${esc(t.unit)}</b></div><div class="row"><span class="mut">Pango kwa mwezi</span><b>TZS ${tzs(t.rent)}</b></div><div class="row"><span class="mut">Kodi imelipwa hadi</span><b>${fmt(t.kuisha)}</b></div></div>
+    <button class="btn full" onclick="goTab('lipa')">💳 Lipa Kodi</button>
+    ${pend.length ? `<div class="banner a" style="margin-top:12px">⏳ Una malipo ${pend.length} yanayosubiri idhini ya mwenye nyumba.</div>` : ''}
+    ${(!S.priv.nida || !S.priv.kinName) ? `<div class="banner a" style="margin-top:12px;cursor:pointer" onclick="goTab('mimi')">👤 Kamilisha taarifa zako (kitambulisho na mtu wa karibu). Bofya hapa.</div>` : ''}`;
+}
+function tLipa(){
+  return `<h2>Lipa Kodi</h2><div class="card"><div class="sm mut" style="margin-bottom:4px">Lipa kwa simu/benki kwa mwenye nyumba, kisha jaza hapa. Atahakiki na kukubali.</div>${payFields('t')}
+    <button id="t-send" class="btn full" onclick="submitPayment()">Tuma Malipo</button></div>`;
+}
+async function submitPayment(){
+  const t = S.tenant, amount = parseInt(val('t-amt'))||0, months = Math.max(1, Math.min(24, parseInt(val('t-miezi'))||3)), method = val('t-method'), ref = val('t-ref').toUpperCase(), paidOn = val('t-date') || todayISO();
+  if(amount <= 0) return toast('Weka kiasi ulicholipa', true);
+  if(method !== 'TASLIMU' && ref.length < 4) return toast('Weka namba ya muamala (kwenye ujumbe wa M-PESA/benki)', true);
+  if(ref && S.payments.some(p=>p.ref===ref && p.status!=='rejected')) return toast('Namba hii ya muamala imeshatumwa', true);
+  if(S._paying) return; S._paying = true; busy(true);
+  try{
+    await db.collection('payments').add({ws:S.ws, tenantId:t.id, tenantName:t.name, unit:t.unit, amount, months, method, ref, paidOn, note:'', status:'pending', createdBy:'tenant', createdAt:TS()});
+    await loadTenant(); S.tab = 'ris'; renderApp(); toast('✔ Malipo yametumwa. Yanasubiri idhini ya mwenye nyumba.');
+  }catch(e){ toast(friendlyErr(e), true); } S._paying = false; busy(false);
+}
+function tRis(){
+  const row = p => p.status==='approved'
+    ? `<div class="row tap" onclick="openReceipt('${p.id}')"><div><div class="b">${esc(p.receiptNo)}</div><div class="sm mut">${fmt(p.paidOn)} · ${fmt(p.kuanza)} → ${fmt(p.mpya)}</div></div><div class="r"><div class="b">TZS ${tzs(p.amount)}</div>${statusBadge(p)}</div></div>`
+    : `<div class="row"><div><div class="b">TZS ${tzs(p.amount)} · ${esc(p.method)}</div><div class="sm mut">${fmt(p.paidOn)}${p.reason?' · '+esc(p.reason):''}</div></div><div class="r">${statusBadge(p)}</div></div>`;
+  return `<h2>Risiti na Malipo Yangu</h2>${S.payments.length ? '<div class="list">'+S.payments.map(row).join('')+'</div>' : '<div class="empty">Bado hujafanya malipo.</div>'}
+    <button class="link" onclick="openVerifyPublic()">🔎 Hakiki Risiti</button>`;
+}
+function tMimi(){
+  const p = S.priv, t = S.tenant;
+  return `<h2>Taarifa Zangu</h2><div class="card"><div class="row"><span class="mut">Jina</span><b>${esc(t.name)}</b></div><div class="row"><span class="mut">Simu</span><b>${esc(t.phone)}</b></div><div class="row"><span class="mut">Nyumba</span><b>${esc(t.unit)}</b></div></div>
+    <div class="card"><label style="margin-top:0">Aina ya kitambulisho</label><select id="m-nt" class="inp">${['','NIDA','Leseni ya Udereva','Kitambulisho cha Kupigia Kura','Pasipoti','Kitambulisho cha Kazi','Nyingine'].map(o=>`<option ${o===(p.nidaType||'')?'selected':''}>${o}</option>`).join('')}</select>
+    <label>Namba ya kitambulisho (NIDA n.k.)</label><input id="m-nida" class="inp" value="${esc(p.nida||'')}">
+    <h3>👥 Mtu wa karibu (kwa dharura)</h3><label>Jina lake</label><input id="m-kn" class="inp" value="${esc(p.kinName||'')}">
+    <label>Namba yake ya simu</label><input id="m-kp" class="inp" type="tel" value="${esc(p.kinPhone||'')}">
+    <label>Uhusiano</label><select id="m-kr" class="inp">${['','Mke/Mume','Mzazi','Ndugu','Mtoto','Rafiki','Mwajiri','Nyingine'].map(o=>`<option ${o===(p.kinRel||'')?'selected':''}>${o}</option>`).join('')}</select>
+    <button class="btn full" onclick="saveProfile()">Hifadhi Taarifa</button></div>`;
+}
+async function saveProfile(){
+  const nidaType = val('m-nt'), nida = val('m-nida'), kinName = val('m-kn'), kinPhone = val('m-kp'), kinRel = val('m-kr'), warn = [];
+  if(nida && nidaType === 'NIDA' && nida.replace(/\D/g,'').length !== 20) warn.push('NIDA kwa kawaida ina tarakimu 20');
+  if(kinPhone && !normPhone(kinPhone)) warn.push('Namba ya mtu wa karibu haionekani sahihi');
+  busy(true);
+  try{
+    await db.collection('tenantPrivate').doc(S.tenant.id).set({ws:S.ws, nidaType, nida, kinName, kinPhone, kinRel, updatedAt:TS()});
+    await loadTenant(); renderApp(); toast(warn.length ? '⚠️ ' + warn.join(' · ') + ' — imehifadhiwa' : '✔ Taarifa zimehifadhiwa', !!warn.length);
+  }catch(e){ toast(friendlyErr(e), true); } busy(false);
+}
+
+// ════════ HAKIKI RISITI (wazi kwa yeyote mwenye namba au barcode) ════════
+let _vStream = null, _vRAF = 0, _vJsqrP = null;
+function vParse(raw){
+  raw = (raw||'').trim();
+  if(/^https?:\/\//i.test(raw)){ try{ raw = (new URL(raw).searchParams.get('hakiki')||'').trim(); }catch(e){ return ''; } }
+  raw = raw.toUpperCase(); return /^RCP-[A-Z0-9]{3,8}-\d{1,6}-\d{1,6}$/.test(raw) ? raw : '';
+}
+function vCard(ok, html){
+  return `<div class="vcard ${ok?'':'bad'}"><div class="b" style="color:${ok?'var(--grn)':'var(--red)'};margin-bottom:6px">${ok?'✅ RISITI HALALI':'❌ HAIJATHIBITIKA'}</div>${html}</div>`;
+}
+function renderVerify(prefill){
+  $('screen-verify').innerHTML = `<div class="acard"><div class="alogo">🔎</div><h1>Hakiki Risiti</h1><p class="mut">Thibitisha risiti ya KISEJA NYUMBA</p>
+    <label>Namba ya risiti</label><input id="v-no" class="inp mono" placeholder="RCP-XXXXX-001-001" autocomplete="off" style="text-transform:uppercase" value="${esc(prefill||'')}" onkeydown="if(event.key==='Enter')verifyGo()">
+    <button class="btn full" onclick="verifyGo()">🔎 Hakiki</button><button class="btn sec full" onclick="vScan()">📷 Scan Barcode kwa Kamera</button>
+    <div id="v-cam" class="hidden" style="margin-top:12px"><video id="v-video" playsinline muted style="width:100%;border-radius:12px;background:#000"></video><canvas id="v-canvas" class="hidden"></canvas><div id="v-msg" class="sm mut"></div><button class="btn sec full" onclick="vStop()">✖ Funga Kamera</button></div>
+    <div id="v-res"></div><button class="link" onclick="closeVerify()">← Rudi</button></div>`;
+  if(prefill) verifyGo();
+}
+function openVerifyPublic(){ renderVerify(''); show('screen-verify'); }
+function closeVerify(){ vStop(); try{ history.replaceState(null,'',location.pathname); }catch(e){} S.hkShown = true; boot(S.user); }
+async function verifyGo(){
+  const no = vParse(val('v-no')), out = $('v-res');
+  if(!no){ out.innerHTML = vCard(false, 'Andika namba ya risiti (mfano <b>RCP-K3X9A-001-001</b>), au scan barcode.'); return; }
+  out.innerHTML = '<div class="empty">⏳ Inahakiki...</div>';
+  try{
+    const d = await db.collection('receipts').doc(no).get();
+    if(!d.exists){ out.innerHTML = vCard(false, 'Risiti <b>' + esc(no) + '</b> haipatikani. Inaweza kuwa si ya kweli, au imeandikwa vibaya.'); return; }
+    const r = d.data(), row = (l,v) => `<div class="row"><span class="mut">${l}</span><b>${v}</b></div>`;
+    out.innerHTML = vCard(true, `<div class="sm mut b">JINA LA MLIPAJI</div><div class="vname">${esc(r.name)}</div>`
+      + row('Kiasi Kilicholipwa', 'TZS ' + tzs(r.amount)) + row('Tarehe ya Malipo', fmt(r.paidOn)) + row('Kipindi', fmt(r.kuanza) + ' → ' + fmt(r.mpya))
+      + row('Nyumba', esc(r.unit)) + row('Namba ya Risiti', esc(r.no)) + (r.hali && r.hali !== 'IMELIPWA' ? row('Hali', esc(r.hali)) : ''));
+  }catch(e){ console.error(e); out.innerHTML = vCard(false, 'Imeshindwa kuhakiki sasa hivi (angalia mtandao). Jaribu tena.'); }
+}
+function vLoadJsQR(){
+  if(typeof jsQR !== 'undefined') return Promise.resolve(); if(_vJsqrP) return _vJsqrP;
+  const urls = ['https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js','https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js'];
+  _vJsqrP = urls.reduce((p,u)=>p.catch(()=>new Promise((res,rej)=>{ const s = document.createElement('script'); s.src = u; s.onload = res; s.onerror = rej; document.head.appendChild(s); })), Promise.reject());
+  _vJsqrP.catch(()=>{ _vJsqrP = null; }); return _vJsqrP;
+}
+async function vScan(){
+  const box = $('v-cam'), v = $('v-video'), msg = $('v-msg');
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return toast('Kamera haipatikani hapa — andika namba ya risiti.', true);
+  try{ _vStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}, audio:false}); }catch(e){ return toast('Ruhusa ya kamera imekataliwa au kamera haipatikani.', true); }
+  v.srcObject = _vStream; try{ await v.play(); }catch(e){} box.classList.remove('hidden'); msg.textContent = 'Elekeza kamera kwenye barcode ya risiti...';
+  let det = null; if('BarcodeDetector' in window){ try{ det = new BarcodeDetector({formats:['qr_code']}); }catch(e){} }
+  if(!det){ try{ await vLoadJsQR(); }catch(e){ msg.textContent = 'Imeshindwa kupakia kisomaji (angalia mtandao). Andika namba ya risiti.'; return; } }
+  const cv = $('v-canvas'), cx = cv.getContext('2d', {willReadFrequently:true});
+  const tick = async () => {
+    if(!_vStream) return;
+    if(v.readyState >= 2 && v.videoWidth){
+      let val2 = null;
+      try{ if(det){ const r = await det.detect(v); if(r && r[0]) val2 = r[0].rawValue; } else { cv.width = v.videoWidth; cv.height = v.videoHeight; cx.drawImage(v,0,0); const im = cx.getImageData(0,0,cv.width,cv.height), c = jsQR(im.data, im.width, im.height); if(c) val2 = c.data; } }catch(e){}
+      if(val2){ const no = vParse(val2); if(no){ vStop(); $('v-no').value = no; verifyGo(); return; } msg.textContent = 'Barcode hii si ya risiti ya KISEJA. Jaribu nyingine...'; }
+    }
+    _vRAF = requestAnimationFrame(tick);
+  };
+  tick();
+}
+function vStop(){ if(_vStream){ _vStream.getTracks().forEach(t=>t.stop()); _vStream = null; } cancelAnimationFrame(_vRAF); const b = $('v-cam'); if(b) b.classList.add('hidden'); }
+
+// ════════ ANZA ════════
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){ try{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(e){} }
+if(CONFIGURED) auth.onAuthStateChanged(boot); else boot(null);
+// mwenye nyumba/mpangaji arudipo kwenye app: onyesha data mpya (malipo mapya, idhini) bila kufunga app
+document.addEventListener('visibilitychange', () => { if(!document.hidden && S.member && !S.busy && $('modal').classList.contains('hidden')) refresh(); });
+
+
+</script></body></html>
