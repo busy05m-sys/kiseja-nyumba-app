@@ -3,12 +3,14 @@
 .r{padding:6px 10px;border-bottom:1px solid #E2E8F0;font-size:.85rem}.ok{color:#065F46}.no{color:#991B1B;font-weight:700;background:#FEF2F2}#sum{font-size:1.1rem;font-weight:800;margin:14px 0;padding:12px;border-radius:10px}.g{background:#D1FAE5;color:#065F46}.b{background:#FEE2E2;color:#991B1B}</style></head><body>
 <h1>🔒 Kipimo cha Kutengwa kwa Data — KISEJA NYUMBA</h1>
 <p>Kipimo hiki kinaunda watumiaji wa majaribio, kinajaribu <b>kuvunja</b> ulinzi wa data (mwenye nyumba kusoma data ya mwingine, mpangaji kujikubalia malipo, n.k.), kisha kinafuta watumiaji hao. <b>Kinaonyesha PASS kwa kila ulinzi unaofanya kazi.</b> Chochote chekundu ni hatari: usianze kutumia mfumo.</p>
+<div style="background:#F1F5F9;border-radius:12px;padding:12px 14px;margin:14px 0"><b>Admin Mkuu</b> (inahitajika ili kuwasha wenye nyumba wa majaribio na kujaribu ulinzi wa admin). Barua pepe na nenosiri haviendi popote isipokuwa kwa Firebase ya mradi huu.<br>
+<input id="adm-e" type="email" placeholder="Barua pepe ya admin (info@kiseja.com)" style="width:100%;padding:10px;margin:8px 0 6px;border:1px solid #CBD5E1;border-radius:8px;font-size:1rem"><input id="adm-p" type="password" placeholder="Nenosiri la admin" style="width:100%;padding:10px;border:1px solid #CBD5E1;border-radius:8px;font-size:1rem"></div>
 <button id="go" onclick="go()">▶ Anza Kipimo</button><div id="sum"></div><div id="out"></div>
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
 <script>
 const FB_CONFIG = /*FB_CONFIG_START*/{apiKey:'AIzaSyAL6kfctfuAnZaJMFw9onQdyKO9u6wn8rY',authDomain:'tmsm-4207.firebaseapp.com',projectId:'tmsm-4207',appId:'1:1024848464862:web:42373390f8977d20d5eb4f'}/*FB_CONFIG_END*/;
-// ════════ KIPIMO CHA KUTENGWA KWA DATA — kinajaribu kuvunja Rules kwa watumiaji halisi wa majaribio ════════
-async function runIsolation(firebase, config, log){
+// ════════ KIPIMO CHA KUTENGWA KWA DATA NA USAJILI — kinajaribu kuvunja Rules kwa watumiaji halisi wa majaribio ════════
+async function runIsolation(firebase, config, log, adm){
   const R = Math.random().toString(36).slice(2,8); let n = 0, bad = 0;
   const rec = (name, ok, d) => { n++; if(!ok) bad++; log(name, ok, d); };
   const code = e => (e && e.code) || (e && e.message) || String(e);
@@ -16,21 +18,72 @@ async function runIsolation(firebase, config, log){
   async function deny(name, fn){ try{ await fn(); rec(name + '  [inakatazwa]', false, 'IMERUHUSIWA (hatari!)'); }catch(e){ rec(name + '  [inakatazwa]', code(e)==='permission-denied', code(e)==='permission-denied' ? '' : 'kosa lisilotarajiwa: ' + code(e)); } }
   const mk = async (label) => { const app = firebase.initializeApp(config, label + R + Math.random().toString(36).slice(2,5)), a = app.auth();
     const cred = await a.createUserWithEmailAndPassword('iso_' + R + '_' + label.toLowerCase() + '@test.kiseja.com', 'Isolation#' + R); return {app, a, d:app.firestore(), uid:cred.user.uid, user:cred.user}; };
-  const TS = () => firebase.firestore.FieldValue.serverTimestamp(), users = [];
+  const TS = () => firebase.firestore.FieldValue.serverTimestamp(), TM = ms => firebase.firestore.Timestamp.fromMillis(ms), users = [], DAY = 86400000;
   const join = async (u, code_, ws, tid) => { const b = u.d.batch(); b.set(u.d.collection('members').doc(u.uid), {role:'tenant', ws, tenantId:tid, code:code_, name:'T'}); b.update(u.d.collection('invites').doc(code_), {used:true, usedBy:u.uid, usedAt:TS()}); await b.commit(); };
+  const wsDoc = {name:'Test', tenantSeq:0, phone:'0700000000', email:'t@test.kiseja.com', status:'pending', paidUntil:null, price:null};
   try{
+    // ── 0) Admin Mkuu halisi (anatumika kuwasha wenye nyumba wa majaribio) ──
+    const AD = (() => { const app = firebase.initializeApp(config, 'Admin' + R); return {app, a:app.auth(), d:app.firestore()}; })();
+    try{ const c = await AD.a.signInWithEmailAndPassword(adm.email, adm.password); AD.uid = c.user.uid; rec('Admin Mkuu anaingia kwa barua pepe na nenosiri alilotoa', true); }
+    catch(e){ rec('Admin Mkuu anaingia kwa barua pepe na nenosiri alilotoa', false, code(e) + ' — hakikisha akaunti ipo (Authentication) na hati ya admins/UID imeundwa'); throw new Error('admin-login'); }
     const OA = await mk('OwnerA'), OB = await mk('OwnerB'), TU1 = await mk('Tenant1'), TU2 = await mk('Tenant2'), X = await mk('Intruder'); users.push(OA, OB, TU1, TU2, X);
     const anon = firebase.initializeApp(config, 'anon' + R), anonDb = anon.firestore();
-    // ── 1) Kuanzisha ──
-    for(const o of [OA, OB]) await allow('Mwenye nyumba anaunda nafasi na uanachama wake', async () => { const b = o.d.batch(); b.set(o.d.collection('workspaces').doc(o.uid), {name:'Test', ownerUid:o.uid, tenantSeq:0, createdAt:TS()}); b.set(o.d.collection('members').doc(o.uid), {role:'owner', ws:o.uid, name:'Test'}); await b.commit(); });
+    // ── 1) Kujisajili kama mwenye nyumba: huduma haijawashwa ──
+    for(const o of [OA, OB]) await allow('Mwenye nyumba anaunda nafasi (hali "pending") na uanachama wake', async () => { const b = o.d.batch(); b.set(o.d.collection('workspaces').doc(o.uid), {...wsDoc, ownerUid:o.uid, createdAt:TS()}); b.set(o.d.collection('members').doc(o.uid), {role:'owner', ws:o.uid, name:'Test'}); await b.commit(); });
     await deny('Mgeni anajifanya mwenye nyumba wa nafasi ya A', () => X.d.collection('members').doc(X.uid).set({role:'owner', ws:OA.uid, name:'x'}));
-    await deny('Mgeni anaunda nafasi kwa jina la uid ya A', () => X.d.collection('workspaces').doc(OA.uid).set({name:'x', ownerUid:OA.uid, tenantSeq:0}));
+    await deny('Mgeni anaunda nafasi kwa jina la uid ya A', () => X.d.collection('workspaces').doc(OA.uid).set({...wsDoc, ownerUid:OA.uid, createdAt:TS()}));
+    await deny('Mgeni anaunda nafasi akijipa hali "active" (kuruka malipo)', () => X.d.collection('workspaces').doc(X.uid).set({...wsDoc, ownerUid:X.uid, createdAt:TS(), status:'active', paidUntil:TM(Date.now()+30*DAY)}));
+    await deny('Mgeni anaunda nafasi akijiwekea bei', () => X.d.collection('workspaces').doc(X.uid).set({...wsDoc, ownerUid:X.uid, createdAt:TS(), price:1}));
     const T1 = 'ta1' + R, T2 = 'ta2' + R, C1 = 'CODE1' + R.toUpperCase().slice(0,3), C2 = 'CODE2' + R.toUpperCase().slice(0,3);
-    await allow('A anaongeza wapangaji wawili na misimbo yao', async () => { const b = OA.d.batch();
-      for(const [t,c,no] of [[T1,C1,'001'],[T2,C2,'002']]){ b.set(OA.d.collection('tenants').doc(t), {ws:OA.uid, no, name:'Mpangaji ' + no, phone:'0700000' + no, unit:'U' + no, rent:100000, startDate:'2026-01-01', kuisha:'2026-01-01', salio:0, seq:0, status:'a'}); b.set(OA.d.collection('invites').doc(c), {ws:OA.uid, tenantId:t, phone:'0700000' + no, name:'M', used:false}); } await b.commit(); });
+    const tdoc = (no, ws) => ({ws, no, name:'Mpangaji ' + no, phone:'0700000' + no, unit:'U' + no, rent:100000, startDate:'2026-01-01', kuisha:'2026-01-01', salio:0, seq:0, status:'a'});
+    await deny('Huduma haijawashwa: mwenye nyumba haruhusiwi kuongeza mpangaji', () => OA.d.collection('tenants').doc(T1).set(tdoc('001', OA.uid)));
+    await deny('Huduma haijawashwa: haruhusiwi kuongeza nyumba', () => OA.d.collection('units').doc('un' + R).set({ws:OA.uid, name:'U001', rent:100000}));
+    await deny('Mwenye nyumba anajiwashia huduma (status "active")', () => OA.d.collection('workspaces').doc(OA.uid).update({status:'active'}));
+    await deny('Mwenye nyumba anajiwekea tarehe ya usajili', () => OA.d.collection('workspaces').doc(OA.uid).update({paidUntil:TM(Date.now()+99*DAY)}));
+    await deny('Mwenye nyumba anabadilisha bei ya makubaliano', () => OA.d.collection('workspaces').doc(OA.uid).update({price:1}));
+    await deny('Mwenye nyumba anajiwekea alama ya mwezi wa uangalizi (trial)', () => OA.d.collection('workspaces').doc(OA.uid).update({trial:true}));
+    await deny('Mgeni anaunda nafasi akijipa alama ya uangalizi', () => X.d.collection('workspaces').doc(X.uid).set({...wsDoc, ownerUid:X.uid, createdAt:TS(), trial:true}));
+    await allow('Mwenye nyumba anabadilisha simu yake mwenyewe', () => OA.d.collection('workspaces').doc(OA.uid).update({phone:'0711111111'}));
+    const SP = 'sp1' + R, spBase = {ws:OA.uid, wsName:'Test', amount:30000, months:1, method:'M-PESA', ref:'REFSUB' + R, paidOn:'2026-10-01', status:'pending', createdBy:'owner', createdAt:TS()};
+    await allow('Mwenye nyumba (hata kabla ya kuwashwa) anatuma taarifa ya malipo ya usajili', () => OA.d.collection('subPayments').doc(SP).set(spBase));
+    await deny('Mwenye nyumba anatuma malipo ya usajili yaliyokwisha "approved"', () => OA.d.collection('subPayments').doc('sp2' + R).set({...spBase, status:'approved'}));
+    await deny('Mwenye nyumba anatuma malipo ya usajili kwa nafasi ya B', () => OA.d.collection('subPayments').doc('sp3' + R).set({...spBase, ws:OB.uid}));
+    await deny('Mwenye nyumba anajikubalia malipo ya usajili', () => OA.d.collection('subPayments').doc(SP).update({status:'approved'}));
+    await allow('Mwenye nyumba anasoma malipo yake ya usajili', () => OA.d.collection('subPayments').where('ws','==',OA.uid).get());
+    await deny('Mwenye nyumba B anasoma malipo ya usajili ya A', () => OB.d.collection('subPayments').where('ws','==',OA.uid).get());
+    // ── 2) Wasio-admin hawawezi kufanya kazi za admin ──
+    await deny('Mwenye nyumba anaorodhesha nafasi zote', () => OA.d.collection('workspaces').get());
+    await deny('Mwenye nyumba anajiunda admin', () => OA.d.collection('admins').doc(OA.uid).set({email:'x'}));
+    await deny('Mwenye nyumba anasoma maelezo ya siri ya admin', () => OA.d.collection('adminNotes').doc(OA.uid).get());
+    await deny('Mwenye nyumba anabadilisha taarifa za malipo za KISEJA', () => OA.d.collection('platform').doc('config').set({bankNo:'1'}));
+    await allow('Mwenye nyumba anasoma taarifa za malipo za KISEJA', () => OA.d.collection('platform').doc('config').get());
+    await deny('Mgeni (asiyeingia) anasoma taarifa za malipo za KISEJA', () => anonDb.collection('platform').doc('config').get());
+    await deny('Admin anajaribu kujiongeza admin mwingine kutoka kwenye app', () => AD.d.collection('admins').doc(X.uid).set({email:'x'}));
+    // ── 3) Admin Mkuu ──
+    await allow('Admin anaorodhesha nafasi zote', () => AD.d.collection('workspaces').get());
+    await allow('Admin anaorodhesha malipo yote ya usajili', () => AD.d.collection('subPayments').get());
+    await allow('Admin anaandika maelezo ya siri ya mteja', () => AD.d.collection('adminNotes').doc(OA.uid).set({note:'kipimo', updatedAt:TS()}));
+    await allow('Admin anaweka taarifa za malipo za KISEJA', () => AD.d.collection('platform').doc('config').set({company:'KISEJA COMPANY LIMITED', updatedAt:TS()}, {merge:true}));
+    await allow('Admin anaweka bei ya makubaliano ya mteja A', () => AD.d.collection('workspaces').doc(OA.uid).update({price:30000}));
+    await allow('Admin anakubali malipo ya usajili na kuwasha A na B', async () => { const b = AD.d.batch(), until = TM(Date.now()+30*DAY);
+      b.update(AD.d.collection('subPayments').doc(SP), {status:'approved', paidUntil:until, decidedAt:TS(), decidedBy:AD.uid});
+      b.update(AD.d.collection('workspaces').doc(OA.uid), {status:'active', paidUntil:until}); b.update(AD.d.collection('workspaces').doc(OB.uid), {status:'active', paidUntil:until}); await b.commit(); });
+    await allow('Admin anaanzisha mwezi wa uangalizi (trial) kwa B', () => AD.d.collection('workspaces').doc(OB.uid).update({trial:true}));
+    await deny('B (mwenye uangalizi) anaondoa alama ya uangalizi au kujiongezea muda', () => OB.d.collection('workspaces').doc(OB.uid).update({trial:false, paidUntil:TM(Date.now()+99*DAY)}));
+    await deny('Admin anabadilisha mmiliki wa nafasi (ownerUid)', () => AD.d.collection('workspaces').doc(OA.uid).update({ownerUid:X.uid}));
+    // ── 4) Baada ya kuwashwa: kazi za kawaida za mwenye nyumba ──
+    await allow('A (amewashwa) anaongeza wapangaji wawili na misimbo yao', async () => { const b = OA.d.batch();
+      for(const [t,c,no] of [[T1,C1,'001'],[T2,C2,'002']]){ b.set(OA.d.collection('tenants').doc(t), tdoc(no, OA.uid)); b.set(OA.d.collection('invites').doc(c), {ws:OA.uid, tenantId:t, phone:'0700000' + no, name:'M', used:false}); } await b.commit(); });
     await allow('A anaongeza nyumba', () => OA.d.collection('units').doc('un' + R).set({ws:OA.uid, name:'U001', rent:100000}));
-    await deny('A anaunda mpangaji kwenye nafasi ya B', () => OA.d.collection('tenants').doc('bad' + R).set({ws:OB.uid, no:'009', name:'x', rent:1}));
-    // ── 2) Kujiunga kwa msimbo ──
+    await deny('A anaunda mpangaji kwenye nafasi ya B', () => OA.d.collection('tenants').doc('bad' + R).set(tdoc('009', OB.uid)));
+    await deny('Admin anaongeza mpangaji kwa mteja (haruhusiwi)', () => AD.d.collection('tenants').doc('adm' + R).set(tdoc('008', OA.uid)));
+    await deny('Admin anasoma wapangaji wa mteja', () => AD.d.collection('tenants').where('ws','==',OA.uid).get());
+    await deny('Admin anasoma malipo ya kodi ya mteja', () => AD.d.collection('payments').where('ws','==',OA.uid).get());
+    await deny('Admin anasoma misimbo ya mteja', () => AD.d.collection('invites').where('ws','==',OA.uid).get());
+    await deny('Admin anasoma nyumba za mteja', () => AD.d.collection('units').where('ws','==',OA.uid).get());
+    await deny('Admin anasoma taarifa nyeti (kitambulisho) za mpangaji', () => AD.d.collection('tenantPrivate').doc(T1).get());
+    await deny('Admin anaandika risiti', () => AD.d.collection('receipts').doc('RCP-ADMIN-001-001').set({ws:OA.uid, name:'x'}));
+    // ── 5) Kujiunga kwa msimbo ──
     await deny('Mgeni anajiunga bila kutumia msimbo (anaandika uanachama peke yake)', () => X.d.collection('members').doc(X.uid).set({role:'tenant', ws:OA.uid, tenantId:T1, code:C1, name:'x'}));
     await deny('Mgeni anajiunga na msimbo wa T1 lakini anadai kuwa T2', () => join(X, C1, OA.uid, T2));
     await deny('Mgeni anajiunga na msimbo usiopo', () => join(X, 'HAKUNA00', OA.uid, T1));
@@ -41,7 +94,7 @@ async function runIsolation(firebase, config, log){
     await deny('Mpangaji anasoma uanachama wa mwenye nyumba', () => TU1.d.collection('members').doc(OA.uid).get());
     await allow('Mwenye nyumba anasoma uanachama wa mpangaji wake', () => OA.d.collection('members').doc(TU1.uid).get());
     await deny('Mwenye nyumba B anasoma uanachama wa mpangaji wa A', () => OB.d.collection('members').doc(TU1.uid).get());
-    // ── 3) Kutengwa kwa data ──
+    // ── 6) Kutengwa kwa data ──
     await deny('B anasoma mpangaji wa A (kwa kitambulisho)', () => OB.d.collection('tenants').doc(T1).get());
     await deny('B anaorodhesha wapangaji wa A', () => OB.d.collection('tenants').where('ws','==',OA.uid).get());
     await deny('B anaorodhesha malipo ya A', () => OB.d.collection('payments').where('ws','==',OA.uid).get());
@@ -57,8 +110,9 @@ async function runIsolation(firebase, config, log){
     await deny('Mpangaji 1 anaorodhesha misimbo', () => TU1.d.collection('invites').where('ws','==',OA.uid).get());
     await deny('Mpangaji anabadilisha tarehe ya kodi yake mwenyewe', () => TU1.d.collection('tenants').doc(T1).update({kuisha:'2099-01-01'}));
     await deny('Mpangaji anabadilisha pango lake', () => TU1.d.collection('tenants').doc(T1).update({rent:1}));
-    await deny('Mpangaji anaunda mpangaji', () => TU1.d.collection('tenants').doc('self' + R).set({ws:OA.uid, no:'777', name:'x', rent:1}));
-    // ── 4) Malipo ──
+    await deny('Mpangaji anaunda mpangaji', () => TU1.d.collection('tenants').doc('self' + R).set(tdoc('777', OA.uid)));
+    await deny('Mpangaji anasoma/anaandika orodha ya admin', () => TU1.d.collection('admins').doc(TU1.uid).set({email:'x'}));
+    // ── 7) Malipo ya kodi ──
     await allow('Mpangaji 1 anaorodhesha malipo yake', () => TU1.d.collection('payments').where('tenantId','==',T1).where('ws','==',OA.uid).get());
     await deny('Mpangaji 1 anaorodhesha malipo ya nafasi nzima', () => TU1.d.collection('payments').where('ws','==',OA.uid).get());
     const base = {ws:OA.uid, tenantId:T1, tenantName:'Mpangaji 001', unit:'U001', amount:300000, months:3, method:'M-PESA', ref:'REF' + R, paidOn:'2026-10-01', note:'', status:'pending', createdBy:'tenant', createdAt:TS()};
@@ -74,21 +128,21 @@ async function runIsolation(firebase, config, log){
     await deny('Mpangaji anafuta malipo yake', () => TU1.d.collection('payments').doc(P1).delete());
     await deny('Mpangaji 2 anasoma malipo ya mpangaji 1', () => TU2.d.collection('payments').doc(P1).get());
     await deny('Mwenye nyumba B anakubali malipo ya A', () => OB.d.collection('payments').doc(P1).update({status:'approved'}));
+    const RN = 'RCP-ISO' + R.toUpperCase() + '-001-001';
     await allow('A anakubali malipo, anasasisha mpangaji na kutoa risiti (kwa pamoja)', async () => { const b = OA.d.batch();
-      b.update(OA.d.collection('payments').doc(P1), {status:'approved', receiptNo:'RCP-ISO' + R.toUpperCase() + '-001-001', kuanza:'2026-01-01', mpya:'2026-04-01', covered:3, salio:0, hali:'IMELIPWA'});
+      b.update(OA.d.collection('payments').doc(P1), {status:'approved', receiptNo:RN, kuanza:'2026-01-01', mpya:'2026-04-01', covered:3, salio:0, hali:'IMELIPWA'});
       b.update(OA.d.collection('tenants').doc(T1), {kuisha:'2026-04-01', salio:0, seq:1});
-      b.set(OA.d.collection('receipts').doc('RCP-ISO' + R.toUpperCase() + '-001-001'), {ws:OA.uid, no:'RCP-ISO' + R.toUpperCase() + '-001-001', name:'Mpangaji 001', unit:'U001', amount:300000, paidOn:'2026-10-01', kuanza:'2026-01-01', mpya:'2026-04-01', hali:'IMELIPWA', method:'M-PESA'}); await b.commit(); });
+      b.set(OA.d.collection('receipts').doc(RN), {ws:OA.uid, no:RN, name:'Mpangaji 001', unit:'U001', amount:300000, paidOn:'2026-10-01', kuanza:'2026-01-01', mpya:'2026-04-01', hali:'IMELIPWA', method:'M-PESA'}); await b.commit(); });
     await allow('Mpangaji 1 anaona malipo yake yaliyokubaliwa', () => TU1.d.collection('payments').doc(P1).get());
     await deny('Mwenye nyumba anafuta malipo yaliyokubaliwa', () => OA.d.collection('payments').doc(P1).delete());
-    // ── 5) Risiti za umma ──
-    const RN = 'RCP-ISO' + R.toUpperCase() + '-001-001';
+    // ── 8) Risiti za umma ──
     await allow('Mgeni (asiyeingia) anasoma risiti moja kwa namba yake', () => anonDb.collection('receipts').doc(RN).get());
     await deny('Mgeni anaorodhesha risiti zote', () => anonDb.collection('receipts').get());
     await deny('Mgeni anaandika risiti', () => anonDb.collection('receipts').doc('RCP-FEKI-001-001').set({ws:OA.uid, name:'x'}));
     await deny('Mpangaji anaandika/anabadilisha risiti', () => TU1.d.collection('receipts').doc(RN).update({amount:1}));
     await deny('Mwenye nyumba B anabadilisha risiti ya A', () => OB.d.collection('receipts').doc(RN).update({amount:1}));
     await deny('Mgeni asiyeingia anasoma mpangaji', () => anonDb.collection('tenants').doc(T1).get());
-    // ── 6) Taarifa nyeti (kitambulisho, mtu wa karibu) ──
+    // ── 9) Taarifa nyeti ──
     const pv = {ws:OA.uid, nidaType:'NIDA', nida:'19900101123450000123', kinName:'Ndugu', kinPhone:'0755000000', kinRel:'Mzazi', updatedAt:TS()};
     await allow('Mpangaji 2 anasoma taarifa zake nyeti ambazo bado hazijaundwa', () => TU2.d.collection('tenantPrivate').doc(T2).get());
     await allow('Mpangaji 1 anaandika taarifa zake nyeti', () => TU1.d.collection('tenantPrivate').doc(T1).set(pv));
@@ -98,7 +152,25 @@ async function runIsolation(firebase, config, log){
     await allow('Mwenye nyumba A anasoma taarifa nyeti za mpangaji wake', () => OA.d.collection('tenantPrivate').doc(T1).get());
     await deny('Mwenye nyumba B anasoma taarifa nyeti za mpangaji wa A', () => OB.d.collection('tenantPrivate').doc(T1).get());
     await deny('Mpangaji 2 anasoma taarifa nyeti za mpangaji 1', () => TU2.d.collection('tenantPrivate').doc(T1).get());
-  }catch(e){ rec('Maandalizi ya kipimo yamekwama', false, code(e)); }
+    // ── 10) Kusimamishwa, kuisha muda na siku za neema ──
+    const setWs = (patch) => AD.d.collection('workspaces').doc(OA.uid).update(patch);
+    await allow('Admin anasimamisha huduma ya A', () => setWs({status:'suspended'}));
+    await deny('Akisimamishwa: A haruhusiwi kuandika (nyumba)', () => OA.d.collection('units').doc('sus' + R).set({ws:OA.uid, name:'S', rent:1}));
+    await deny('Akisimamishwa: A haruhusiwi kukubali malipo', () => OA.d.collection('payments').doc(P1).update({note:'x'}));
+    await allow('Akisimamishwa: A bado anasoma data yake', () => OA.d.collection('tenants').where('ws','==',OA.uid).get());
+    await deny('Akisimamishwa: mpangaji hawezi kutuma malipo ya kodi', () => TU1.d.collection('payments').doc('p8' + R).set({...base, ref:'REF8' + R}));
+    await allow('Akisimamishwa: mpangaji bado anasoma taarifa zake', () => TU1.d.collection('tenants').doc(T1).get());
+    await allow('Akisimamishwa: risiti bado zinahakikika na umma', () => anonDb.collection('receipts').doc(RN).get());
+    await allow('Admin anarejesha huduma', () => setWs({status:'active'}));
+    await allow('Akirejeshwa: A anaandika tena', () => OA.d.collection('units').doc('res' + R).set({ws:OA.uid, name:'R', rent:1}));
+    await allow('Admin anaweka usajili kuisha jana (siku za neema)', () => setWs({paidUntil:TM(Date.now() - 1*DAY)}));
+    await allow('Siku za neema (jana): A bado anaandika', () => OA.d.collection('units').doc('gr' + R).set({ws:OA.uid, name:'G', rent:1}));
+    await allow('Admin anaweka usajili kuisha siku 5 zilizopita', () => setWs({paidUntil:TM(Date.now() - 5*DAY)}));
+    await deny('Imeisha (siku 5): A haruhusiwi kuandika', () => OA.d.collection('units').doc('ex' + R).set({ws:OA.uid, name:'E', rent:1}));
+    await deny('Imeisha: mpangaji hawezi kutuma malipo ya kodi', () => TU1.d.collection('payments').doc('p9' + R).set({...base, ref:'REF9' + R}));
+    await allow('Imeisha: A bado anatuma malipo ya usajili ili kuendelea', () => OA.d.collection('subPayments').doc('sp4' + R).set({...spBase, ref:'REFSUB4' + R}));
+    await allow('Admin anarejesha usajili wa siku 30', () => setWs({status:'active', paidUntil:TM(Date.now() + 30*DAY)}));
+  }catch(e){ if(String(e && e.message) !== 'admin-login') rec('Maandalizi ya kipimo yamekwama', false, code(e)); }
   for(const u of users){ try{ await u.user.delete(); }catch(e){} }
   return {n, bad};
 }
@@ -107,8 +179,9 @@ if(typeof module !== 'undefined') module.exports = {runIsolation};
 async function go(){
   const b = document.getElementById('go'), out = document.getElementById('out'), sum = document.getElementById('sum'); out.innerHTML = ''; sum.className = ''; sum.textContent = '';
   if(!FB_CONFIG.apiKey){ sum.className = 'b'; sum.textContent = 'Config ya Firebase haijawekwa.'; return; }
+  const adm = {email:document.getElementById('adm-e').value.trim(), password:document.getElementById('adm-p').value}; if(!adm.email || !adm.password){ sum.className = 'b'; sum.textContent = 'Weka barua pepe na nenosiri la Admin Mkuu.'; return; }
   b.disabled = true; sum.textContent = '⏳ Inaendesha...';
-  const r = await runIsolation(firebase, FB_CONFIG, (name, ok, d) => { const e = document.createElement('div'); e.className = 'r ' + (ok?'ok':'no'); e.textContent = (ok?'PASS  ':'FAIL  ') + name + (d?'  — '+d:''); out.appendChild(e); });
+  const r = await runIsolation(firebase, FB_CONFIG, (name, ok, d) => { const e = document.createElement('div'); e.className = 'r ' + (ok?'ok':'no'); e.textContent = (ok?'PASS  ':'FAIL  ') + name + (d?'  — '+d:''); out.appendChild(e); }, adm);
   sum.className = r.bad ? 'b' : 'g'; sum.textContent = r.bad ? ('❌ ' + r.bad + ' kati ya ' + r.n + ' zimeshindwa — USIANZE KUTUMIA MFUMO. Nitumie picha ya skrini hii.') : ('✅ Vipimo vyote ' + r.n + ' vimepita — data imetengwa vizuri.');
   b.disabled = false;
 }
